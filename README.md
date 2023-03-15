@@ -27,7 +27,7 @@ Notes for issues and gotchas encountered when developing and testing Firefox ext
 
   #### Edge case host types
 
-  The permissions error `"Missing host permissions for the tab"` is present on `view-source` and reader view pages that would otherwise allow loading of contextmenu actions.
+  The permissions error `"Missing host permissions for the tab"` is present on `view-source`, PDF view (pdf.js), and reader view pages that would otherwise allow loading of contextmenu actions.
   
   The context menus still render on these pages, but the onclick actions don't work because of the permissions of these special page types, even with the correct expected permissions in the manifest.
   
@@ -35,4 +35,4 @@ Notes for issues and gotchas encountered when developing and testing Firefox ext
   
   Using the `activeTab` manifest permission instead of `tabs` was found to fix host permissions errors on `file://` pages.
   
- **Takeaway:** `activeTab` is preferred, but view-source and reader view pages still won't load contextmenu actions.
+ **Takeaway:** `activeTab` is preferred, but view-source, PDF viewer, and reader view pages still won't load contextmenu actions.
