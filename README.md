@@ -25,14 +25,12 @@ Notes for issues and gotchas encountered when developing and testing Firefox ext
 
  **Takeaway:** use of `chrome.contextMenus.create` is preferred, and [also works with mv3 chrome extensions](https://github.com/wesinator/example-mv3-contextmenu-executescript).
 
-  #### Edge case host types
+  #### `executeScript` and host types
 
-  The permissions error `"Missing host permissions for the tab"` is present on `view-source`, PDF view (pdf.js), and reader view pages that would otherwise allow loading of contextmenu actions.
+  The permissions error `"Missing host permissions for the tab"` is present on `view-source`, PDF view (pdf.js), and reader view pages when trying to run `{scripting|tabs}.executeScript()`.
   
-  The context menus still render on these pages, but the onclick actions don't work because of the permissions of these special page types, even with the correct expected permissions in the manifest.
-  
-  The "missing host permissions" error has also been observed when using the `tabs` permission and loading a context menu onclick function on a local file (`file://`) URI.
+  The "missing host permissions" error has also been observed when using the `tabs` permission and loading `executeScript` on a local file (`file://`) URI.
   
   Using the `activeTab` manifest permission instead of `tabs` was found to fix host permissions errors on `file://` pages.
   
- **Takeaway:** `activeTab` is preferred, but view-source, PDF viewer, and reader view pages still won't load contextmenu actions.
+ **Takeaway:** `activeTab` is preferred, but view-source, PDF viewer, and reader view pages still won't load `executeScript` behaviors.
