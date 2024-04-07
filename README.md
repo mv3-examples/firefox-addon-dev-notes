@@ -34,3 +34,17 @@ Notes for issues and gotchas encountered when developing and testing Firefox ext
   Using the `activeTab` manifest permission instead of `tabs` was found to fix host permissions errors on `file://` pages.
   
  **Takeaway:** `activeTab` is preferred, but view-source, PDF viewer, and reader view pages still won't load `executeScript` behaviors.
+
+## Manifest V3 migration
+
+### Permissions and host access in MV3
+In MV3, [`host_permissions` access is "optional"](https://bugzilla.mozilla.org/show_bug.cgi?id=1745818), meaning host permissions do not run by default, and must be set by the user, [requested by the addon](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/permissions) or enabled using `activeTab` with a user input handler.
+`<all_urls>` host_permission has no effect, whether or not this is by design.
+
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/host_permissions#requested_permissions_and_user_prompts
+
+https://stackoverflow.com/questions/76083327/firefox-extension-manifest-v3-request-permission-to-access-your-data-for-all
+
+`permissions.request` cannot be called via `chrome.runtime.onInstalled.AddListener`, and must be called from a user input handler.
+
+Ex: https://github.com/ipfs/ipfs-companion/blob/7ca6433418909d43ec8801f27e417514614a164c/add-on/src/lib/on-installed.js#L24
