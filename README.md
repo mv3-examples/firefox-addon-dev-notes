@@ -2,10 +2,12 @@
 
 Notes for issues and gotchas encountered when developing and testing Firefox extensions.
 
-## Testing on AMO (addons.mozilla.org)
+## Testing
   - If the test machine does not have the correct time set, attempting to install a recent version of an extension from addons.mozilla.org may show an error "this addon may be corrupt" and won't install it even if the addon does work and installs successfully from the debugging menu. 
   
- **Takeaway:** Take care to make sure the time is synced correctly in VM snapshots when testing.
+    **Takeaway:** Take care to make sure the time is synced correctly in VM snapshots when testing.
+
+  - Firefox for Android browserAction popup extensions will not open when the active tab is on addons.mozilla.org . The addon should be tested with another website or file tab open.
 
 ## WebExtensions API
 
