@@ -37,6 +37,14 @@ Notes for issues and gotchas encountered when developing and testing Firefox ext
   
  **Takeaway:** `activeTab` is preferred, but view-source, PDF viewer, and reader view pages still won't load `executeScript` behaviors.
 
+### `tabs.create()` for `file://` URLs does not work
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1266960
+
+https://discourse.mozilla.org/t/how-to-open-a-file-by-tabs-create/112628
+
+This is something that Chromium has better behavior than Firefox, unfortunately.
+
 ## Manifest V3 migration
 
 ### Permissions and host access in MV3
